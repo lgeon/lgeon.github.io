@@ -40,7 +40,7 @@
   /* labels & kickers */
   .label{
     font-family:"IBM Plex Mono",monospace;
-    font-size:24px;
+    font-size:26px;
     font-weight:500;
     letter-spacing:.16em;
     text-transform:uppercase;
@@ -56,7 +56,14 @@
   .label + .entry{border-top:none;}
 
   /* header */
-  header{margin-bottom:14px;}
+  header{margin-bottom:14px;display:flex;gap:38px;align-items:flex-start;justify-content:space-between;}
+  .head-text{flex:1;min-width:0;}
+  .avatar{
+    flex-shrink:0;margin-top:8px;
+    width:152px;height:188px;object-fit:cover;object-position:center top;
+    border-radius:5px;border:1px solid var(--rule);
+    box-shadow:0 6px 22px rgba(20,24,26,.14);
+  }
   h1{
     font-family:"Fraunces",serif;
     font-weight:600;
@@ -127,6 +134,8 @@
 
   @media(max-width:560px){
     body{font-size:18px;}
+    header{flex-direction:column-reverse;gap:22px;}
+    .avatar{width:124px;height:150px;}
     .twocol{grid-template-columns:1fr;gap:24px;}
     .pub{grid-template-columns:1fr;gap:2px;}
     .pub .idx{display:none;}
@@ -144,14 +153,17 @@
 <div class="wrap">
 
   <header class="reveal d1">
-    <h1>Gen&nbsp;Li</h1>
-    <div class="meta">
-      <span>Beijing, China</span>
-      <a href="mailto:leog3n@gmail.com">leog3n@gmail.com</a>
-      <a href="https://github.com/lgeon">GitHub</a>
-      <a href="https://scholar.google.com/citations?user=JFvqwc8AAAAJ">Google&nbsp;Scholar</a>
-      <a href="files/CV.pdf">CV&nbsp;(PDF)</a>
+    <div class="head-text">
+      <h1>Gen&nbsp;Li</h1>
+      <div class="meta">
+        <span>Beijing, China</span>
+        <a href="mailto:leog3n@gmail.com">leog3n@gmail.com</a>
+        <a href="https://github.com/lgeon">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=JFvqwc8AAAAJ">Google&nbsp;Scholar</a>
+        <a href="files/CV.pdf">CV&nbsp;(PDF)</a>
+      </div>
     </div>
+    <img class="avatar" src="profile.jpg" alt="Gen Li">
   </header>
 
   <section class="reveal d2">
@@ -206,7 +218,7 @@ actually deploy.</p>
         <span class="org">Baidu Inc.</span>
         <span class="when">Jul 2024 &mdash; Now</span>
       </div>
-      <div class="sub">Research & Develop, Commercial Intelligent Agent Team &middot; Beijing</div>
+      <div class="sub">Research &amp; Develop, Commercial Intelligent Agent Team &middot; Beijing</div>
     </div>
 
   
