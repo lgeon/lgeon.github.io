@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gen Li</title>
+<meta name="description" content="Gen Li — research on reasoning in large multimodal models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf7f1;
+    --ink:#1c1a17;
+    --muted:#6b6458;
+    --faint:#a8a092;
+    --accent:#b1572f;
+    --rule:#e3ddd0;
+    --maxw:740px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-weight:400;
+    font-size:19px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--rule) 0.5px,transparent 0.5px);
+    background-size:22px 22px;
+    background-attachment:fixed;
+  }
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:clamp(48px,9vw,110px) 24px 120px;
+  }
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease;}
+  a:hover{border-color:var(--accent);}
+
+  /* labels & kickers */
+  .label{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;align-items:center;gap:14px;
+    margin:64px 0 26px;
+  }
+  .label::before{content:attr(data-n);color:var(--faint);font-weight:400;}
+  .label::after{content:"";flex:1;height:1px;background:var(--rule);}
+
+  /* header */
+  header{margin-bottom:14px;}
+  h1{
+    font-family:"Fraunces",serif;
+    font-weight:600;
+    font-size:clamp(46px,11vw,78px);
+    line-height:.98;
+    letter-spacing:-.02em;
+    margin-bottom:18px;
+  }
+  .role{
+    font-size:21px;
+    color:var(--muted);
+    font-weight:300;
+    max-width:46ch;
+  }
+  .role em{font-style:italic;color:var(--ink);}
+  .meta{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;
+    letter-spacing:.02em;
+    color:var(--muted);
+    margin-top:26px;
+    display:flex;flex-wrap:wrap;gap:8px 18px;
+  }
+  .meta a{color:var(--muted);border-bottom-color:var(--rule);}
+  .meta a:hover{color:var(--accent);border-bottom-color:var(--accent);}
+
+  p{margin-bottom:18px;}
+  p.lead{font-size:20px;}
+  strong{font-weight:500;}
+  h2.dir{
+    font-family:"Fraunces",serif;
+    font-weight:500;font-size:21px;
+    margin:26px 0 6px;letter-spacing:-.01em;
+  }
+
+  /* publications */
+  .pub{
+    display:grid;grid-template-columns:auto 1fr;gap:0 22px;
+    padding:20px 0;border-top:1px solid var(--rule);
+  }
+  .pub:last-child{border-bottom:1px solid var(--rule);}
+  .pub .idx{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--faint);padding-top:5px;}
+  .pub .ptitle{font-family:"Fraunces",serif;font-weight:500;font-size:20px;line-height:1.25;}
+  .pub .auth{color:var(--muted);font-size:17px;}
+  .pub .auth .me{color:var(--ink);font-weight:500;}
+  .pub .venue{
+    display:inline-block;margin-top:6px;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;
+    color:var(--accent);
+  }
+  .pub .links{font-family:"IBM Plex Mono",monospace;font-size:12.5px;margin-top:6px;}
+
+  /* entries (experience / education) */
+  .entry{padding:18px 0;border-top:1px solid var(--rule);}
+  .entry:first-of-type{border-top:none;}
+  .entry .top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
+  .entry .org{font-family:"Fraunces",serif;font-weight:500;font-size:20px;}
+  .entry .when{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--faint);white-space:nowrap;}
+  .entry .sub{color:var(--muted);font-style:italic;font-size:18px;margin-top:1px;}
+  .entry ul{margin:10px 0 0;padding-left:18px;}
+  .entry li{margin-bottom:6px;font-size:17px;line-height:1.5;}
+  .entry li::marker{color:var(--accent);}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  .mini h3{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px;}
+  .mini p{font-size:16.5px;line-height:1.5;color:var(--ink);}
+  .mini .sm{color:var(--muted);font-size:15.5px;}
+
+  footer{margin-top:70px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint);letter-spacing:.04em;}
+
+  @media(max-width:560px){
+    body{font-size:18px;}
+    .twocol{grid-template-columns:1fr;gap:24px;}
+    .pub{grid-template-columns:1fr;gap:2px;}
+    .pub .idx{display:none;}
+  }
+
+  /* load-in */
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}
+  .d4{animation-delay:.29s}.d5{animation-delay:.37s}
+  @media(prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="reveal d1">
+    <h1>Gen&nbsp;Li</h1>
+    <p class="role">AI researcher working on <em>reasoning in large multimodal models</em> &mdash; efficient VLM reasoning and knowledge-intensive multimodal RAG.</p>
+    <div class="meta">
+      <span>Beijing, China</span>
+      <a href="mailto:leog3n@gmail.com">leog3n@gmail.com</a>
+      <a href="https://github.com/lgeon">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=YOUR-ID">Google&nbsp;Scholar</a>
+      <a href="files/CV.pdf">CV&nbsp;(PDF)</a>
+    </div>
+  </header>
+
+  <section class="reveal d2">
+    <div class="label" data-n="01">Research</div>
+    <p class="lead">My research centers on reasoning in large multimodal models, along two complementary directions.</p>
+    <h2 class="dir">Efficient reasoning in vision-language models</h2>
+    <p>Test-time scaling, chain-of-thought compression, and verifier-based / speculative decoding &mdash; making strong multimodal reasoning cheap enough to deploy.</p>
+    <h2 class="dir">Reasoning in knowledge-intensive settings</h2>
+    <p>Long-form video understanding, multi-hop visual QA, and tool-augmented multimodal agents. I am especially interested in bridging training-time alignment (RL / GRPO) with inference-time reasoning, and in understanding when multimodal models can reliably reason beyond their pretraining distribution.</p>
+  </section>
+
+  <section class="reveal d3">
+    <div class="label" data-n="02">Publications</div>
+
+    <div class="pub">
+      <div class="idx">[1]</div>
+      <div>
+        <div class="ptitle">FastV-RAG: Towards Fast and Fine-Grained Video QA with Retrieval-Augmented Generation</div>
+        <div class="auth"><span class="me">Gen Li</span>, Peiyu Liu</div>
+        <span class="venue">ACL 2026 &middot; Main Conference</span>
+        <div class="links"><a href="https://arxiv.org/abs/2601.01513">arXiv</a> &nbsp;/&nbsp; <a href="https://github.com/FastVRAG/FastV-RAG">code</a></div>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="idx">[2]</div>
+      <div>
+        <div class="ptitle">Ring Sketch: A Generic, Low-Complexity, and Hardware-Friendly Traffic Measurement Framework over Sliding Windows</div>
+        <div class="auth"><span class="me">Gen Li</span>, X. Wang, C. Zhao, et al.</div>
+        <span class="venue">IEEE ICC 2024</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal d3">
+    <div class="label" data-n="03">Experience</div>
+
+    <div class="entry">
+      <div class="top">
+        <span class="org">Baidu Inc.</span>
+        <span class="when">Jul 2024 &mdash; Oct 2025</span>
+      </div>
+      <div class="sub">AI Research Engineer, Multimodal Agent Team &middot; Beijing</div>
+      <ul>
+        <li>Built a dual-agent dialogue synthesis framework generating 500K+ training samples; SFT on Qwen3-8B with distilled CoT traces to improve intent understanding.</li>
+        <li>Designed a composite CoT-length reward under online GRPO that decouples reasoning depth from verbosity &mdash; 40% shorter CoTs and 500ms latency reduction with no quality loss.</li>
+        <li>Replaced an ASR&rarr;LLM&rarr;TTS cascade with a native end-to-end multimodal model (Qwen3-Omni, 30B MoE) via progressive SFT+RL; online A/B: &minus;0.7s latency, +9pp conversion.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="top">
+        <span class="org">Efficient Multimodal RAG for Video QA</span>
+        <span class="when">Mar 2024 &mdash; Oct 2025</span>
+      </div>
+      <div class="sub">Research project &middot; led to ACL 2026</div>
+      <ul>
+        <li>Draft-then-verify speculative decoding: a 3B VLM drafts per-document answers in parallel, a 32B VLM verifies in one pass &mdash; ~2&times; speedup with negligible accuracy loss.</li>
+        <li>CLIP-based entity-to-frame alignment to fix fine-grained entity confusion; up to 58.9% latency reduction at comparable accuracy across multiple backbones.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="top">
+        <span class="org">RL-Based Collaborative Network Measurement</span>
+        <span class="when">Sep 2022 &mdash; Mar 2024</span>
+      </div>
+      <div class="sub">Master&rsquo;s thesis</div>
+      <ul>
+        <li>Topology-aware DQN with a graph attention network over a 45-node fat-tree topology; ~50% lower Max-MRE than hash-based coordination baselines.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal d4">
+    <div class="label" data-n="04">Education</div>
+    <div class="entry">
+      <div class="top">
+        <span class="org">University of Electronic Science &amp; Technology of China</span>
+        <span class="when">2021 &mdash; 2024</span>
+      </div>
+      <div class="sub">M.Eng., Information &amp; Communication Engineering &middot; GPA 3.91/4.00</div>
+    </div>
+    <div class="entry">
+      <div class="top">
+        <span class="org">Sichuan University</span>
+        <span class="when">2017 &mdash; 2021</span>
+      </div>
+      <div class="sub">B.Eng., Communication Engineering &middot; GPA 3.72/4.00</div>
+    </div>
+  </section>
+
+  <section class="reveal d5">
+    <div class="label" data-n="05">Also</div>
+    <div class="twocol">
+      <div class="mini">
+        <h3>Service</h3>
+        <p>Reviewer, NeurIPS 2026</p>
+      </div>
+      <div class="mini">
+        <h3>Teaching</h3>
+        <p>TA, Data Structures &amp; Algorithms<br><span class="sm">UESTC, 2022&ndash;2023</span></p>
+      </div>
+      <div class="mini">
+        <h3>Skills</h3>
+        <p class="sm">Python, C++, Java &middot; PyTorch, vLLM, ms-swift, LangChain</p>
+      </div>
+      <div class="mini">
+        <h3>Languages</h3>
+        <p class="sm">Mandarin (native) &middot; English (IELTS 6.5)</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="reveal d5">&copy; 2026 Gen Li &middot; built as a single page</footer>
+
+</div>
+</body>
+</html>
