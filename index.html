@@ -10,12 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#faf7f1;
-    --ink:#1c1a17;
-    --muted:#6b6458;
-    --faint:#a8a092;
-    --accent:#b1572f;
-    --rule:#e3ddd0;
+    --paper:#e8eaeb;
+    --ink:#16181a;
+    --muted:#565d62;
+    --faint:#949aa0;
+    --accent:#2f5d7c;
+    --rule:#d3d7d9;
     --maxw:740px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -28,9 +28,6 @@
     font-size:19px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(var(--rule) 0.5px,transparent 0.5px);
-    background-size:22px 22px;
-    background-attachment:fixed;
   }
   .wrap{
     max-width:var(--maxw);
@@ -43,16 +40,20 @@
   /* labels & kickers */
   .label{
     font-family:"IBM Plex Mono",monospace;
-    font-size:12px;
+    font-size:24px;
     font-weight:500;
     letter-spacing:.16em;
     text-transform:uppercase;
     color:var(--accent);
     display:flex;align-items:center;gap:14px;
-    margin:64px 0 26px;
+    margin:64px 0 0;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--rule);
   }
   .label::before{content:attr(data-n);color:var(--faint);font-weight:400;}
-  .label::after{content:"";flex:1;height:1px;background:var(--rule);}
+  /* first item under a label has no top rule — the label's border is its divider */
+  .label + .pub,
+  .label + .entry{border-top:none;}
 
   /* header */
   header{margin-bottom:14px;}
@@ -96,7 +97,6 @@
     display:grid;grid-template-columns:auto 1fr;gap:0 22px;
     padding:20px 0;border-top:1px solid var(--rule);
   }
-  .pub:last-child{border-bottom:1px solid var(--rule);}
   .pub .idx{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--faint);padding-top:5px;}
   .pub .ptitle{font-family:"Fraunces",serif;font-weight:500;font-size:20px;line-height:1.25;}
   .pub .auth{color:var(--muted);font-size:17px;}
@@ -110,7 +110,6 @@
 
   /* entries (experience / education) */
   .entry{padding:18px 0;border-top:1px solid var(--rule);}
-  .entry:first-of-type{border-top:none;}
   .entry .top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
   .entry .org{font-family:"Fraunces",serif;font-weight:500;font-size:20px;}
   .entry .when{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--faint);white-space:nowrap;}
@@ -146,23 +145,34 @@
 
   <header class="reveal d1">
     <h1>Gen&nbsp;Li</h1>
-    <p class="role">AI researcher working on <em>reasoning in large multimodal models</em> &mdash; efficient VLM reasoning and knowledge-intensive multimodal RAG.</p>
     <div class="meta">
       <span>Beijing, China</span>
       <a href="mailto:leog3n@gmail.com">leog3n@gmail.com</a>
       <a href="https://github.com/lgeon">GitHub</a>
-      <a href="https://scholar.google.com/citations?user=YOUR-ID">Google&nbsp;Scholar</a>
+      <a href="https://scholar.google.com/citations?user=JFvqwc8AAAAJ">Google&nbsp;Scholar</a>
       <a href="files/CV.pdf">CV&nbsp;(PDF)</a>
     </div>
   </header>
 
   <section class="reveal d2">
+    <p class="lead">I am a researcher specializing in Multimodal Large Language Models (MLLMs), currently with the Commercial Intelligent Agent team at Baidu. I received my Master's degree from the University of Electronic Science and Technology of China (UESTC), where I was advised by Prof. Xiong Wang on the intersection of networking and machine learning. Prior to this, I earned my Bachelor's degree from Sichuan University.</p>
+  </section>
+
+  <section class="reveal d2">
     <div class="label" data-n="01">Research</div>
-    <p class="lead">My research centers on reasoning in large multimodal models, along two complementary directions.</p>
-    <h2 class="dir">Efficient reasoning in vision-language models</h2>
-    <p>Test-time scaling, chain-of-thought compression, and verifier-based / speculative decoding &mdash; making strong multimodal reasoning cheap enough to deploy.</p>
-    <h2 class="dir">Reasoning in knowledge-intensive settings</h2>
-    <p>Long-form video understanding, multi-hop visual QA, and tool-augmented multimodal agents. I am especially interested in bridging training-time alignment (RL / GRPO) with inference-time reasoning, and in understanding when multimodal models can reliably reason beyond their pretraining distribution.</p>
+    <p class="lead">My research centers on <strong>reasoning in MLLMs</strong>: how they can
+actively reason over long, complex inputs and external knowledge, rather than
+relying on a single-pass snapshot of what they see.</p>
+    <h2 class="dir">Agentic multimodal reasoning.</h2>
+    <p>Models that actively gather evidence while reasoning — interacting with the
+visual input, retrieving external knowledge (multimodal RAG), and calling tools
+— across long-form video understanding, multi-hop visual question answering, and
+tool-augmented agents, rather than settling for a single-pass perceptual
+snapshot.</p>
+    <h2 class="dir">Efficient multimodal reasoning.</h2>
+    <p>Test-time scaling, chain-of-thought compression, and verifier-based /
+speculative decoding — making strong multimodal reasoning cheap enough to
+actually deploy.</p>
   </section>
 
   <section class="reveal d3">
@@ -189,47 +199,18 @@
   </section>
 
   <section class="reveal d3">
-    <div class="label" data-n="03">Experience</div>
+    <div class="label" data-n="03">Experience &amp; Education</div>
 
     <div class="entry">
       <div class="top">
         <span class="org">Baidu Inc.</span>
-        <span class="when">Jul 2024 &mdash; Oct 2025</span>
+        <span class="when">Jul 2024 &mdash; Now</span>
       </div>
-      <div class="sub">AI Research Engineer, Multimodal Agent Team &middot; Beijing</div>
-      <ul>
-        <li>Built a dual-agent dialogue synthesis framework generating 500K+ training samples; SFT on Qwen3-8B with distilled CoT traces to improve intent understanding.</li>
-        <li>Designed a composite CoT-length reward under online GRPO that decouples reasoning depth from verbosity &mdash; 40% shorter CoTs and 500ms latency reduction with no quality loss.</li>
-        <li>Replaced an ASR&rarr;LLM&rarr;TTS cascade with a native end-to-end multimodal model (Qwen3-Omni, 30B MoE) via progressive SFT+RL; online A/B: &minus;0.7s latency, +9pp conversion.</li>
-      </ul>
+      <div class="sub">Research & Develop, Commercial Intelligent Agent Team &middot; Beijing</div>
     </div>
 
-    <div class="entry">
-      <div class="top">
-        <span class="org">Efficient Multimodal RAG for Video QA</span>
-        <span class="when">Mar 2024 &mdash; Oct 2025</span>
-      </div>
-      <div class="sub">Research project &middot; led to ACL 2026</div>
-      <ul>
-        <li>Draft-then-verify speculative decoding: a 3B VLM drafts per-document answers in parallel, a 32B VLM verifies in one pass &mdash; ~2&times; speedup with negligible accuracy loss.</li>
-        <li>CLIP-based entity-to-frame alignment to fix fine-grained entity confusion; up to 58.9% latency reduction at comparable accuracy across multiple backbones.</li>
-      </ul>
-    </div>
+  
 
-    <div class="entry">
-      <div class="top">
-        <span class="org">RL-Based Collaborative Network Measurement</span>
-        <span class="when">Sep 2022 &mdash; Mar 2024</span>
-      </div>
-      <div class="sub">Master&rsquo;s thesis</div>
-      <ul>
-        <li>Topology-aware DQN with a graph attention network over a 45-node fat-tree topology; ~50% lower Max-MRE than hash-based coordination baselines.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="reveal d4">
-    <div class="label" data-n="04">Education</div>
     <div class="entry">
       <div class="top">
         <span class="org">University of Electronic Science &amp; Technology of China</span>
@@ -237,6 +218,7 @@
       </div>
       <div class="sub">M.Eng., Information &amp; Communication Engineering &middot; GPA 3.91/4.00</div>
     </div>
+
     <div class="entry">
       <div class="top">
         <span class="org">Sichuan University</span>
@@ -247,7 +229,7 @@
   </section>
 
   <section class="reveal d5">
-    <div class="label" data-n="05">Also</div>
+    <div class="label" data-n="04">Also</div>
     <div class="twocol">
       <div class="mini">
         <h3>Service</h3>
@@ -268,7 +250,7 @@
     </div>
   </section>
 
-  <footer class="reveal d5">&copy; 2026 Gen Li &middot; built as a single page</footer>
+  <footer class="reveal d5">&copy; 2026 Gen Li</footer>
 
 </div>
 </body>
